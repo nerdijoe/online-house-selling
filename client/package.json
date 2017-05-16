@@ -5,7 +5,7 @@
   "author": "Rudy Wahjudi <rudy.wahjudi@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "nodemon build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
@@ -14,8 +14,12 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.16.1",
+    "semantic-ui-css": "^2.2.10",
     "vue": "^2.2.6",
-    "vue-router": "^2.3.1"
+    "vue-axios": "^2.0.2",
+    "vue-router": "^2.3.1",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

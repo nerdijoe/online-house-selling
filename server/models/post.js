@@ -11,7 +11,9 @@ var postSchema = new Schema({
   country: { type: String, required: true },
   created_at: { type: Date, required: false, default: Date.now },
   updated_at: { type: Date, required: false, default: Date.now },
-  pictures: [ {type: String, default: []} ]
+  pictures: [ {type: String, default: []} ],
+  map_lat: [ {type: Number} ],
+  map_lng: [ {type: Number} ]
 
 })
 

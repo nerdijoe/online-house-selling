@@ -8,7 +8,7 @@
         <img src="/images/avatar2/large/kristy.png">
       </div>
       <div class="content">
-        <a class="header">{{ post.title }}</a>
+        <a class="header" @click="seeDetail(post._id)">{{ post.title }}</a>
         <div class="meta">
           <span class="date">Posted on {{ post.created_at }}</span>
         </div>
@@ -52,6 +52,12 @@ export default {
       'getPostsfromDB',
       'deletePost'
     ]),
+    seeDetail(post_id) {
+      console.log('seeDetail', post_id)
+      this.$router.push({
+        name: 'ListingDetail',
+        query: { id: post_id }
+      })    },
     createNewListing() {
       this.$router.push('listingform')
     },

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Test from '@/components/Test'
 import Listing from '@/components/Listing'
 import ListingForm from '@/components/ListingForm'
+import ListingDetail from '@/components/ListingDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -17,6 +18,11 @@ export default new Router({
       path: '/listingform',
       name: 'ListingForm',
       component: ListingForm
+    },
+    {
+      path: '/detail',
+      name: 'ListingDetail',
+      component: ListingDetail
     },
     {
       path: '/test',

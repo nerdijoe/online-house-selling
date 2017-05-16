@@ -49,7 +49,7 @@
           <input type="text" name="picture" v-model="postForm.picture">
         </div>
       </div>
-      
+
       <div class="fields">
         <div class="ten wide field">
           <button id="btnSubmitLogin" class="ui button green right floated" type="submit"> {{ postForm._id ? 'Update' : 'Post Listing' }} </button>
@@ -60,12 +60,41 @@
 
     </form>
 
+    <gmap-map
+      :center="center"
+      :zoom="10"
+      style="width: 500px; height: 300px"
+      @click="mapRclicked"
+    >
+      <gmap-marker
+        :key="index"
+        v-for="(m, index) in markers"
+        :position="m.position"
+        :clickable="true"
+        :draggable="true"
+        @click="center=m.position"
+      ></gmap-marker>
+    </gmap-map>
+
+
   </div>
 
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+
+import * as VueGoogleMaps from 'vue2-google-maps';
+import Vue from 'vue';
+
+  Vue.use(VueGoogleMaps, {
+    load: {
+      key: 'AIzaSyAyPn_nD60WIRhX0ukbZIa_5KCQU83jAJA',
+      v: 'OPTIONAL VERSION NUMBER',
+      // libraries: 'places', //// If you need to use place input
+    }
+  });
+
 
 export default {
   data() {
@@ -79,7 +108,13 @@ export default {
         city: '',
         country: '',
         picture: ''
-      }
+      },
+      center: {lat: -6.264597, lng: 106.782843},
+      markers: [
+        { position: {lat: -6.264597, lng: 106.782843} }
+
+      ]
+
     }
   },
   // computed: mapGetters({
@@ -99,6 +134,30 @@ export default {
     },
     backToListing () {
       this.$router.push('/')
+    },
+    mapRclicked (mouseArgs) {
+      console.log('mapRclicked')
+      const createdMarker = this.addMarker();
+      createdMarker.position.lat = mouseArgs.latLng.lat();
+      createdMarker.position.lng = mouseArgs.latLng.lng();
+
+      console.log(`[${createdMarker.position.lat}], [${createdMarker.position.lng}]`)
+      // call map position
+    },
+    addMarker: function addMarker() {
+      this.markers.pop()
+      this.markers.push({
+        position: { lat: 48.8538302, lng: 2.2982161 },
+        opacity: 1,
+        draggable: true,
+        enabled: true,
+        clicked: 0,
+        rightClicked: 0,
+        dragended: 0,
+        ifw: true,
+        ifw2text: "This text is bad please change me :( "
+      });
+      return this.markers[this.markers.length - 1];
     }
   },
   created() {

@@ -1,6 +1,7 @@
 var express = require('express')
 var path = require('path')
 var bodyParser = require('body-parser')
+var cors = require('cors')
 
 var index = require('./routes/index')
 var posts = require('./routes/posts')
@@ -24,7 +25,7 @@ mongoose.connect(mongoDB_config[app_env], (err, res) => {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(cors())
 
 app.use('/', index);
 app.use('/api/posts/', posts)

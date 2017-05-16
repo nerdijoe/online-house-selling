@@ -14,7 +14,7 @@ export default new Router({
       component: Listing
     },
     {
-      path: '/newlisting',
+      path: '/listingform',
       name: 'ListingForm',
       component: ListingForm
     },

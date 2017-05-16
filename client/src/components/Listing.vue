@@ -13,7 +13,16 @@
           <span class="date">Posted on {{ post.created_at }}</span>
         </div>
         <div class="description">
-          {{ post.description }}
+          <p> {{ post.description }} </p>
+          <p>
+            <button class="yellow circular ui icon button" @click="editListing(post._id)">
+              <i class="write icon"></i>
+            </button>
+            <button class="red circular ui icon button" @click="deleteListing(post._id)">
+              <i class="remove icon"></i>
+            </button>
+
+          </p>
         </div>
       </div>
       <div class="extra content">
@@ -21,6 +30,7 @@
           <i class="marker icon"></i>
           {{ post.city }}
         </a>
+
       </div>
     </div>
 
@@ -39,10 +49,22 @@ export default {
   methods: {
     ...mapActions([
       'increment',
-      'getPostsfromDB'
+      'getPostsfromDB',
+      'deletePost'
     ]),
     createNewListing() {
-      this.$router.push('/newlisting')
+      this.$router.push('listingform')
+    },
+    editListing(post_id) {
+      console.log('editListing', post_id)
+      this.$router.push({
+        name: 'ListingForm',
+        query: { id: post_id }
+      })
+    },
+    deleteListing(post_id) {
+      console.log('deleteListing', post_id)
+      this.deletePost(post_id)
     }
   },
   created () {

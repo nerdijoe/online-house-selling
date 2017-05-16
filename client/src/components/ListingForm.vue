@@ -6,7 +6,7 @@
     </button>
 
     <h2>New Listing</h2>
-    <form class="ui form" v-on:submit.prevent="createListing" >
+    <form class="ui form" v-on:submit.prevent="saveListing" >
       <div class="fields">
         <div class="ten wide field">
           <label>Title</label>
@@ -62,21 +62,55 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  computed: mapGetters({
-    postForm: 'getPosts'
-  }),
+  data() {
+    return {
+      postForm: {
+        _id: null,
+        title: '',
+        description: '',
+        price: null,
+        address: '',
+        city: '',
+        country: ''
+      }
+    }
+  },
+  // computed: mapGetters({
+  //   postForm: 'getPosts'
+  // }),
   methods: {
     ...mapActions([
-      'createPost'
+      'savePost'
     ]),
-    createListing () {
+    ...mapGetters([
+      'getPosts'
+    ]),
+    saveListing () {
       console.log('createListing')
-      this.createPost(this.postForm)
+      this.savePost(this.postForm)
       this.$router.push('/')
     },
     backToListing () {
       this.$router.push('/')
     }
+  },
+  created() {
+    // get query id from URL params
+    var post_id = this.$router.currentRoute.query.id
+
+    if(post_id) {
+      // this.postForm = this.getPostbyId(post_id)
+      var posts = this.getPosts()
+      console.log(posts)
+      var index = posts.findIndex( p => p._id == post_id )
+
+      if(index != -1) {
+        console.log(posts[index]);
+        this.postForm = posts[index];
+      }
+    }
+
+
   }
 }
 </script>

@@ -61,7 +61,8 @@ export default {
         price: null,
         address: '',
         city: '',
-        country: ''
+        country: '',
+        picture: ''
       },
       center: {lat: -6.264597, lng: 106.782843},
       markers: [

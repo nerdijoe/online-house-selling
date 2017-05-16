@@ -13,7 +13,9 @@ exports.create = (req, res, next) => {
 }
 
 exports.get_all = (req, res, next) => {
-  Post.find( (err, posts) => {
+  Post.find()
+  .sort({created_at: -1})
+  .exec( (err, posts) => {
     if(err) res.send(err)
     res.send(posts)
   })

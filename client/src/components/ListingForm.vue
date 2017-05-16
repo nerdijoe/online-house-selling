@@ -10,7 +10,7 @@
       <div class="fields">
         <div class="ten wide field">
           <label>Title</label>
-          <input type="text" name="username" v-model="postForm.title">
+          <input type="text" name="title" v-model="postForm.title">
         </div>
       </div>
       <div class="fields">
@@ -22,28 +22,34 @@
       <div class="fields">
         <div class="ten wide field">
           <label>Price</label>
-          <input type="text" name="username" v-model="postForm.price">
+          <input type="text" name="price" v-model="postForm.price">
         </div>
       </div>
       <div class="fields">
         <div class="ten wide field">
           <label>Address</label>
-          <input type="text" name="username" v-model="postForm.address">
+          <input type="text" name="address" v-model="postForm.address">
         </div>
       </div>
       <div class="fields">
         <div class="ten wide field">
           <label>City</label>
-          <input type="text" name="username" v-model="postForm.city">
+          <input type="text" name="city" v-model="postForm.city">
         </div>
       </div>
       <div class="fields">
         <div class="ten wide field">
           <label>Country</label>
-          <input type="text" name="username" v-model="postForm.country">
+          <input type="text" name="country" v-model="postForm.country">
         </div>
       </div>
-
+      <div class="fields">
+        <div class="ten wide field">
+          <label>Picture</label>
+          <input type="text" name="picture" v-model="postForm.picture">
+        </div>
+      </div>
+      
       <div class="fields">
         <div class="ten wide field">
           <button id="btnSubmitLogin" class="ui button green right floated" type="submit"> {{ postForm._id ? 'Update' : 'Post Listing' }} </button>
@@ -71,7 +77,8 @@ export default {
         price: null,
         address: '',
         city: '',
-        country: ''
+        country: '',
+        picture: ''
       }
     }
   },

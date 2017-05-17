@@ -12,9 +12,8 @@ var postSchema = new Schema({
   created_at: { type: Date, required: false, default: Date.now },
   updated_at: { type: Date, required: false, default: Date.now },
   picture: {type: String, required: false, default: 'http://i.imgur.com/t3KAKNb.jpg'} ,
-  map_lat: [ {type: Number} ],
-  map_lng: [ {type: Number} ]
-
+  map_lat: [ {type: Number, required: false, default: -6.210615} ],
+  map_lng: [ {type: Number, required: false, default: 106.844613} ]
 })
 
 var Post = mongoose.model('Post', postSchema);

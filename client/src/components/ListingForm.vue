@@ -60,6 +60,8 @@
 
     </form>
 
+    <p>{{ postForm.map_lat }}, {{ postForm.map_lng }}</p>
+
     <gmap-map
       :center="center"
       :zoom="10"
@@ -107,7 +109,9 @@ export default {
         address: '',
         city: '',
         country: '',
-        picture: ''
+        picture: null,
+        map_lat: null,
+        map_lng: null
       },
       center: {lat: -6.264597, lng: 106.782843},
       markers: [
@@ -141,8 +145,10 @@ export default {
       createdMarker.position.lat = mouseArgs.latLng.lat();
       createdMarker.position.lng = mouseArgs.latLng.lng();
 
-      console.log(`[${createdMarker.position.lat}], [${createdMarker.position.lng}]`)
+
+      // console.log(`[${createdMarker.position.lat}], [${createdMarker.position.lng}]`)
       // call map position
+      this.updatePositionFieldinForm(mouseArgs);
     },
     addMarker: function addMarker() {
       this.markers.pop()
@@ -158,6 +164,12 @@ export default {
         ifw2text: "This text is bad please change me :( "
       });
       return this.markers[this.markers.length - 1];
+    },
+    updatePositionFieldinForm(args) {
+      this.postForm.map_lat = args.latLng.lat();
+      this.postForm.map_lng = args.latLng.lng();
+
+      // console.log(typeof this.postForm.map_lat)
     }
   },
   created() {

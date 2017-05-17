@@ -4,31 +4,62 @@
       Back
     </button>
 
-    <h3>{{ post.title }}</h3>
-    <div class="ui segment">
-      <p>{{ post.description }}</p>
+    <h1>Listing Detail</h1>
 
-      <p>{{ markers }}</p>
-      {{ center }}
+
+    <div class="ui segments">
+      <div class="ui segment">
+        <h2>{{ post.title }}</h2>
+        <img class="ui big centered bordered image" v-bind:src="post.picture">
+
+      </div>
+      <div class="ui segments">
+        <div class="ui segment">
+          <h4>Description</h4>
+          <p>{{ post.description }}</p>
+        </div>
+      </div>
+      <div class="ui segment">
+        <h4>Price</h4>
+        <p>$ {{ post.price }},-</p>
+      </div>
+      <div class="ui horizontal segments">
+        <div class="ui segment">
+          <h4>Address</h4>
+          <p>{{ post.address }}</p>
+        </div>
+        <div class="ui segment">
+          <h4>City</h4>
+          <p>{{ post.city }}</p>
+        </div>
+        <div class="ui segment">
+          <h4>Country</h4>
+          <p>{{ post.country }}</p>
+        </div>
+      </div>
+      <div class="ui segment">
+        <h4>Map</h4>
+
+        <gmap-map
+          :center="center"
+          :zoom="10"
+          style="width: 500px; height: 300px"
+        >
+          <gmap-marker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="false"
+            @click="center=m.position"
+          ></gmap-marker>
+        </gmap-map>
+
+      </div>
     </div>
 
-    <button class="ui green basic button" @click="getPosition">get position</button>
 
 
-    <gmap-map
-      :center="center"
-      :zoom="17"
-      style="width: 500px; height: 300px"
-    >
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        :clickable="true"
-        :draggable="true"
-        @click="center=m.position"
-      ></gmap-marker>
-    </gmap-map>
 
   </div>
 </template>
@@ -62,11 +93,12 @@ export default {
         address: '',
         city: '',
         country: '',
-        picture: ''
+        picture: null,
+        map_lat: null,
+        map_lng: null
       },
       center: {lat: -6.264597, lng: 106.782843},
       markers: [
-        { position: {lat: -6.264597, lng: 106.782843} }
 
       ]
     }
@@ -98,7 +130,16 @@ export default {
         console.log("here")
 
         console.log(posts[index]);
+
+
         this.post = posts[index];
+        console.log("typeof",typeof this.post.map_lat);
+        console.log(this.post.map_lat)
+        // for some reason this.post.map_lat and map_lng is an array
+        //???
+        var marker = { position: {lat: this.post.map_lat[0], lng: this.post.map_lng[0]} }
+        this.markers.push(marker)
+        this.center = {lat: this.post.map_lat[0], lng: this.post.map_lng[0]}
       }
     }
   }

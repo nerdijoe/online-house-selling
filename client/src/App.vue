@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="ui container">
+      <img class="ui centered medium image"src="./assets/logo_rumrum2.png">
       <router-view></router-view>
     </div>
   </div>

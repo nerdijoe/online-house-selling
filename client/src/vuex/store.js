@@ -19,7 +19,9 @@ const store = new Vuex.Store({
       address: '',
       city: '',
       country: '',
-      picture: ''
+      picture: null,
+      map_lat: null,
+      map_lng: null
     }
   },
   getters: {
@@ -95,7 +97,9 @@ const store = new Vuex.Store({
           address: newPost.address,
           city: newPost.city,
           country: newPost.country,
-          picture: newPost.picture
+          picture: newPost.picture,
+          map_lat: newPost.map_lat,
+          map_lng: newPost.map_lng
         })
         .then(response => {
           console.log("savePost - update ", response.data)
@@ -115,7 +119,9 @@ const store = new Vuex.Store({
           address: newPost.address,
           city: newPost.city,
           country: newPost.country,
-          picture: newPost.picture
+          picture: newPost.picture,
+          map_lat: newPost.map_lat,
+          map_lng: newPost.map_lng
         })
         .then(response => {
           console.log(response.data)
